@@ -3,112 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>快捷传送门 - 4399 游戏大厅</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>正在前往 沈阳师范大学...</title>
+  <!-- 3秒后备用 Meta 跳转 -->
+  <meta http-equiv="refresh" content="3;url=https://www.synu.edu.cn/">
   <style>
+    :root {
+      --primary: #1d4ed8;
+      --accent: #38bdf8;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-gradient);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: #f8fafc;
+      overflow: hidden;
+      position: relative;
     }
-    
-    /* Background subtle animated glow */
-    @keyframes pulse-slow {
-      0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.45; }
-      50% { transform: scale(1.15) translate(20px, -20px); opacity: 0.7; }
+
+    /* 柔和的背景动态光晕 */
+    body::before,
+    body::after {
+      content: "";
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: 0;
+      opacity: 0.45;
+      animation: float 10s ease-in-out infinite alternate;
     }
-    .animate-blob {
-      animation: pulse-slow 8s infinite ease-in-out;
+
+    body::before {
+      background: #2563eb;
+      top: -10%;
+      left: 15%;
     }
-    .animation-delay-2000 {
-      animation-delay: 2.5s;
+
+    body::after {
+      background: #0284c7;
+      bottom: -10%;
+      right: 15%;
+      animation-delay: -5s;
     }
-    .animation-delay-4000 {
-      animation-delay: 5s;
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.1); }
+    }
+
+    /* 毛玻璃卡片主体 */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(90%, 460px);
+      padding: 44px 36px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 倒计时环形容器 */
+    .countdown-container {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-container svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 5;
+    }
+
+    .circle-progress {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-dasharray: 220;
+      stroke-dashoffset: 0;
+      animation: progress 3s linear forwards;
+    }
+
+    @keyframes progress {
+      to { stroke-dashoffset: 220; }
+    }
+
+    .timer-text {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    /* 标题与文字排版 */
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 28px;
+    }
+
+    /* 底部跳转链接按钮 */
+    .btn-redirect {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #cbd5e1;
+      font-size: 13px;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
+    }
+
+    .btn-redirect:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-redirect svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-x-hidden selection:bg-orange-500 selection:text-white">
+<body>
 
-  <!-- Ambient Light Orbs -->
-  <div class="absolute top-1/4 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-orange-500/20 rounded-full blur-3xl pointer-events-none animate-blob -z-10"></div>
-  <div class="absolute bottom-1/4 right-1/4 w-80 h-80 sm:w-96 sm:h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none animate-blob animation-delay-2000 -z-10"></div>
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-red-500/10 rounded-full blur-3xl pointer-events-none animate-blob animation-delay-4000 -z-10"></div>
-
-  <!-- Central Card -->
-  <main class="w-full max-w-md bg-slate-900/70 border border-slate-800/80 backdrop-blur-xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-orange-500/5 transition-all duration-300 hover:border-slate-700/80">
-    
-    <!-- Top Icon Badge -->
-    <div class="flex items-center justify-center mb-6">
-      <div class="relative group">
-        <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl blur opacity-40 group-hover:opacity-75 transition duration-300"></div>
-        <div class="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60 flex items-center justify-center text-orange-400 shadow-inner">
-          <i data-lucide="gamepad-2" class="w-8 h-8 transition-transform duration-300 group-hover:scale-110"></i>
-        </div>
-      </div>
+  <main class="card">
+    <div class="countdown-container">
+      <svg viewBox="0 0 80 80">
+        <circle class="circle-bg" cx="40" cy="40" r="35" />
+        <circle class="circle-progress" cx="40" cy="40" r="35" />
+      </svg>
+      <span class="timer-text" id="countdown">3</span>
     </div>
 
-    <!-- Title and Subtitle -->
-    <div class="text-center space-y-2 mb-8">
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-medium mb-1">
-        <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span>
-        <span>游戏快捷通道</span>
-      </div>
-      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-        童年回忆 · 4399
-      </h1>
-      <p class="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
-        点击下方按钮即可立即直达 4399 游戏大厅，开启经典网页游戏时光。
-      </p>
-    </div>
+    <h1>即将进入 沈阳师范大学</h1>
+    <p class="subtitle">页面正在跳转中，请稍候...</p>
 
-    <!-- Actions Area -->
-    <div class="space-y-4">
-      <!-- Primary Action Button -->
-      <a 
-        href="https://www.4399.com" 
-        rel="noopener noreferrer"
-        class="group relative flex items-center justify-center w-full px-6 py-4 rounded-2xl font-semibold text-white bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-[length:200%_auto] hover:bg-right transition-all duration-500 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
-      >
-        <span class="flex items-center gap-2">
-          <span>进入 4399 游戏平台</span>
-          <i data-lucide="external-link" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
-        </span>
-      </a>
-
-      <!-- Quick Feature List / Tags -->
-      <div class="pt-2 grid grid-cols-3 gap-2 text-center text-xs text-slate-400">
-        <div class="bg-slate-800/50 border border-slate-800 rounded-xl py-2 px-1">
-          <p class="font-medium text-slate-200">免安装</p>
-          <p class="text-[10px] text-slate-500">点开即玩</p>
-        </div>
-        <div class="bg-slate-800/50 border border-slate-800 rounded-xl py-2 px-1">
-          <p class="font-medium text-slate-200">海量收录</p>
-          <p class="text-[10px] text-slate-500">经典小游戏</p>
-        </div>
-        <div class="bg-slate-800/50 border border-slate-800 rounded-xl py-2 px-1">
-          <p class="font-medium text-slate-200">完全免费</p>
-          <p class="text-[10px] text-slate-500">畅享休闲</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer Note -->
-    <footer class="mt-8 pt-4 border-t border-slate-800/60 text-center">
-      <p class="text-xs text-slate-500">
-        目标网址：<span class="text-slate-400 font-mono">https://www.4399.com</span>
-      </p>
-    </footer>
+    <a href="https://www.synu.edu.cn/" class="btn-redirect" id="jumpBtn">
+      <span>若未自动跳转，点击此处</span>
+      <svg viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+      </svg>
+    </a>
   </main>
 
   <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
+    const targetUrl = "https://www.synu.edu.cn/";
+    let remaining = 3;
+    const timerElem = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      remaining -= 1;
+      if (remaining > 0) {
+        timerElem.textContent = remaining;
+      } else {
+        clearInterval(timer);
+        window.location.href = targetUrl;
+      }
+    }, 1000);
   </script>
+
 </body>
 </html>
